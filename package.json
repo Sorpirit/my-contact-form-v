@@ -1,5 +1,5 @@
 {
-  "homepage": "http://Sorpirit.github.io/my-contact-form",
+  "homepage": "http://Sorpirit.github.io/my-contact-form-v",
   "name": "my-contact-form",
   "version": "0.1.0",
   "private": true,
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "predepoly": "npm run build",
-    "depoly": "gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
