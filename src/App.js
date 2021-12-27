@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import emailjs from 'emailjs-com'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Form, Button, Alert, Fade } from 'react-bootstrap'
-import configData from './config.js'
+import configData from './config.json'
 
 function App () {
   const useLimitedRequests = function () {
@@ -122,7 +122,7 @@ function App () {
       <ReCAPTCHA
           className="mb-3 d-flex justify-content-center"
           theme="dark"
-          sitekey="6LdMAWMdAAAAAIDRlq0y92zVhFD5dThwIPwZyiMd"
+          sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
           onChange={CaptchaCheck}
         />
     </div>
