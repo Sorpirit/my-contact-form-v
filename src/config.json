@@ -1,5 +1,6 @@
 {
     "SERVICE_ID": "service_l89he0s",
     "TEMPLATE_ID" : "template_l8t0oid",
-    "USER_ID" : "user_yvdLAydZ45L4hplgp5nK4"
+    "USER_ID" : "user_yvdLAydZ45L4hplgp5nK4",
+    "RECAPTCHA_SITEKEY": "6LdMAWMdAAAAAIDRlq0y92zVhFD5dThwIPwZyiMd"
 }

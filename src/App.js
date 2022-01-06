@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import emailjs from 'emailjs-com'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Form, Button, Alert, Fade } from 'react-bootstrap'
-import configData from './config.js'
+import configData from './config.json'
 
 function App () {
   const useLimitedRequests = function () {
@@ -42,6 +42,19 @@ function App () {
 
   const [, addRequest] = useLimitedRequests()
 
+  const onResponse = (message, successful) => {
+    console.log(message)
+    setSendingForm(false)
+    setResponse(true)
+    if(!successful)
+      setFailed(true)
+
+    setTimeout(() => {
+      setResponse(false)
+      setFailed(false)
+    }, 2000);
+  }
+
   function CaptchaCheck (value) {
     setCaptchaKey(value)
   }
@@ -59,26 +72,20 @@ function App () {
 
     try {
       if (addRequest() > 0) {
-        emailjs.send(configData.SERVICE_ID, configData.TEMPLATE_ID, data, configData.USER_ID)
+        emailjs.send(configData['SERVICE_ID'], configData['TEMPLATE_ID'], data, configData['USER_ID'])
           .then((result) => {
-            console.log(result.text)
-            setSendingForm(false)
+            onResponse(result.text, true)
           }, (error) => {
-            console.log(error.text)
-            setSendingForm(false)
-            setFailed(true)
+            onResponse(error.text, false)
           })
       } else {
-        setFailed(true)
+        onResponse("Too many requests", false)
       }
     } catch (error) {
-      console.log(error.text)
-      setSendingForm(false)
-      setFailed(true)
+      onResponse(error.text, false)
     }
 
     e.target.reset()
-    setResponse(true)
   }
 
   return (
@@ -122,7 +129,7 @@ function App () {
       <ReCAPTCHA
           className="mb-3 d-flex justify-content-center"
           theme="dark"
-          sitekey="6LdMAWMdAAAAAIDRlq0y92zVhFD5dThwIPwZyiMd"
+          sitekey={configData['RECAPTCHA_SITEKEY']}
           onChange={CaptchaCheck}
         />
     </div>
