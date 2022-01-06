@@ -129,7 +129,7 @@ function App () {
       <ReCAPTCHA
           className="mb-3 d-flex justify-content-center"
           theme="dark"
-          sitekey={configData['RECAPTCHA_SITEKEY']}
+          sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
           onChange={CaptchaCheck}
         />
     </div>
